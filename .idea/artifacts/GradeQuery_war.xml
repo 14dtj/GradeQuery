@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="war" build-on-make="true" name="GradeQuery:war">
+  <artifact type="war" name="GradeQuery:war">
     <output-path>$PROJECT_DIR$/out/artifacts/GradeQuery_war</output-path>
     <root id="archive" name="GradeQuery_war.war">
       <element id="artifact" artifact-name="GradeQuery:war exploded" />

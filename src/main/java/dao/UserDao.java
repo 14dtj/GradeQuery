@@ -1,7 +1,11 @@
 package dao;
 
+import model.Grade;
+
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -14,8 +18,8 @@ public class UserDao {
      * @param username
      * @return
      */
-    public Map<String, String> getGrade(String username, String password) {
-        Map<String, String> result = new HashMap<String, String>();
+    public List<Grade> getGrade(String username, String password) {
+        List<Grade> result = new ArrayList<Grade>();
         Connection con = JDBCUtil.getCon();
         try {
             PreparedStatement pstmt = con.prepareStatement("select grade,courseName from grade,course,student where student.username=grade.username and grade.courseId=course.courseId and student.username=? and student.password=?;");
@@ -23,7 +27,10 @@ public class UserDao {
             pstmt.setString(2, password);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
-                result.put(rs.getString("courseName"), rs.getString("grade"));
+                Grade grade = new Grade();
+                grade.setCourse(rs.getString("courseName"));
+                grade.setGrade(rs.getDouble("grade"));
+                result.add(grade);
             }
         } catch (SQLException e) {
             e.printStackTrace();
