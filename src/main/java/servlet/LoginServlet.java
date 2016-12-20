@@ -4,6 +4,7 @@ import dao.DaoFactory;
 import dao.UserDao;
 import model.Grade;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,6 +34,15 @@ public class LoginServlet extends HttpServlet {
             request.getRequestDispatcher("errorUser.html").forward(request, response);
         } else {
             request.getSession().setAttribute("username", username);
+            ServletContext context = request.getSession().getServletContext();
+            Integer count = (Integer) context.getAttribute("user_count");
+            if (count == null) {
+                count = new Integer(1);
+            } else {
+                int co = count.intValue();
+                count = new Integer(co + 1);
+            }
+            context.setAttribute("user_count", count);
             request.setAttribute("grades", data);
             request.getRequestDispatcher("grade.jsp").forward(request, response);
         }

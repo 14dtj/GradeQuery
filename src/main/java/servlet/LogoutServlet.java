@@ -1,5 +1,6 @@
 package servlet;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,11 @@ public class LogoutServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("index.html");
+        ServletContext context = session.getServletContext();
+        Integer count = (Integer) context.getAttribute("user_count");
+        int co = count.intValue();
+        count = new Integer(co - 1);
+        context.setAttribute("user_count", count);
+        response.sendRedirect("index.jsp");
     }
 }

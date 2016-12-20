@@ -1,7 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <meta charset="UTF-8">
     <title>Grade Query</title>
 </head>
 <body>
@@ -21,6 +20,18 @@
         </tr>
     </table>
 </form>
-<a href="visitor.jsp">游客身份查看</a>
+总人数：
+<%
+    ServletContext context = session.getServletContext();
+    Integer count = (Integer) context.getAttribute("all_count");
+%>
+<%=count %>
+已登录：
+<%
+    Integer count1 = (Integer) context.getAttribute("user_count");
+    if (count1 == null)
+        count1 = 0;
+%>
+<%=count1 %>
 </body>
 </html>
