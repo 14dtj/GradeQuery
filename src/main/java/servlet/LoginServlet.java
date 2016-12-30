@@ -3,6 +3,7 @@ package servlet;
 import dao.DaoFactory;
 import dao.UserDao;
 import model.Grade;
+import service.ServiceFactory;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -28,8 +29,7 @@ public class LoginServlet extends HttpServlet {
 
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        UserDao dao = DaoFactory.getUserDao();
-        List<Grade> data = dao.getGrade(username, password);
+        List<Grade> data = ServiceFactory.getUserService().getGrade(username, password);
         if (data.size() == 0) {
             request.getRequestDispatcher("errorUser.html").forward(request, response);
         } else {

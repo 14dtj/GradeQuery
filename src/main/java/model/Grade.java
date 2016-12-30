@@ -4,7 +4,13 @@ package model;
  * Created by tjDu on 2016/12/20.
  */
 public class Grade {
+    /**
+     * 课程名
+     */
     private String course;
+    /**
+     * 成绩
+     */
     private double grade;
 
     public String getCourse() {

@@ -33,5 +33,7 @@
         count1 = 0;
 %>
 <%=count1 %>
+游客：
+<%=count - count1 %>
 </body>
 </html>
